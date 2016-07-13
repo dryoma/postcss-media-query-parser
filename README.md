@@ -1,6 +1,6 @@
 # postcss-media-query-parser
 
-[![Build Status](https://travis-ci.org/dryoma/postcss-media-query-parser.svg?branch=master)](https://travis-ci.org/dryoma/postcss-media-query-parser)
+[![NPM version](http://img.shields.io/npm/v/postcss-media-query-parser.svg)](https://www.npmjs.org/package/postcss-media-query-parser) [![Build Status](https://travis-ci.org/dryoma/postcss-media-query-parser.svg?branch=master)](https://travis-ci.org/dryoma/postcss-media-query-parser)
 
 Media query parser with very simple traversing functionality.
 
