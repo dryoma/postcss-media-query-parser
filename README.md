@@ -95,7 +95,7 @@ root.walkAtRules("media", (atRule) => {
 Node is a very generic item in terms of this parser. It's is pretty much everything that ends up in the parsed result. Each node has these properties:
 
 * `type`: the type of the node (see below);
-* `value`: nodes value stripped of trailing whitespaces;
+* `value`: the node's value stripped of trailing whitespaces;
 * `sourceIndex`: 0-based index of the node start relative to the source start (excluding trailing whitespaces);
 * `before`: a string that contain a whitespace between the node start and the previous node end/source start;
 * `after`: a string that contain a whitespace between the node end and the next node start/source end;
