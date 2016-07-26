@@ -8,6 +8,7 @@
  *  {string} node.before -- whitespaces that precede the element
  *  {string} node.sourceIndex -- the index of the element in a source media
  *    query list, 0-based
+ *  {object} node.parent -- a link to the parent node (a container)
  *
  * Some nodes (media queries, media feature expressions) contain other nodes.
  * They additionally have:

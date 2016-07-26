@@ -14,24 +14,28 @@ test('`only screen and (color)`.', t => {
     type: 'media-query',
     value: 'only screen and (color)',
     sourceIndex: 0,
+    parent: result,
     nodes: [{
       after: ' ',
       before: '',
       type: 'keyword',
       value: 'only',
       sourceIndex: 0,
+      parent: result.nodes[0],
     }, {
       after: ' ',
       before: ' ',
       type: 'media-type',
       value: 'screen',
       sourceIndex: 5,
+      parent: result.nodes[0],
     }, {
       after: ' ',
       before: ' ',
       type: 'keyword',
       value: 'and',
       sourceIndex: 12,
+      parent: result.nodes[0],
     }, {
       after: '',
       before: ' ',
@@ -44,7 +48,9 @@ test('`only screen and (color)`.', t => {
         type: 'media-feature',
         value: 'color',
         sourceIndex: 17,
+        parent: result.nodes[0].nodes[3],
       }],
+      parent: result.nodes[0],
     }],
   }, 'The structure of an MQ node.');
 });
@@ -62,24 +68,28 @@ test('`not tv and (min-width: 10px)`.', t => {
     type: 'media-query',
     value: 'not tv and (min-width: 10px)',
     sourceIndex: 0,
+    parent: result,
     nodes: [{
       after: ' ',
       before: '',
       type: 'keyword',
       value: 'not',
       sourceIndex: 0,
+      parent: result.nodes[0],
     }, {
       after: ' ',
       before: ' ',
       type: 'media-type',
       value: 'tv',
       sourceIndex: 4,
+      parent: result.nodes[0],
     }, {
       after: ' ',
       before: ' ',
       type: 'keyword',
       value: 'and',
       sourceIndex: 7,
+      parent: result.nodes[0],
     }, {
       after: '',
       before: ' ',
@@ -92,13 +102,16 @@ test('`not tv and (min-width: 10px)`.', t => {
         type: 'media-feature',
         value: 'min-width',
         sourceIndex: 12,
+        parent: result.nodes[0].nodes[3],
       }, {
         after: '',
         before: ' ',
         type: 'value',
         value: '10px',
         sourceIndex: 23,
+        parent: result.nodes[0].nodes[3],
       }],
+      parent: result.nodes[0],
     }],
   }, 'The structure of an MQ node.');
 });
@@ -121,13 +134,16 @@ test('`not tv, screen, (max-width: $var)`.', t => {
       type: 'keyword',
       value: 'not',
       sourceIndex: 0,
+      parent: result.nodes[0],
     }, {
       after: '',
       before: ' ',
       type: 'media-type',
       value: 'tv',
       sourceIndex: 4,
+      parent: result.nodes[0],
     }],
+    parent: result,
   }, {
     after: '',
     before: ' ',
@@ -140,7 +156,9 @@ test('`not tv, screen, (max-width: $var)`.', t => {
       type: 'media-type',
       value: 'screen',
       sourceIndex: 8,
+      parent: result.nodes[1],
     }],
+    parent: result,
   }, {
     after: '',
     before: ' ',
@@ -159,14 +177,18 @@ test('`not tv, screen, (max-width: $var)`.', t => {
         type: 'media-feature',
         value: 'max-width',
         sourceIndex: 17,
+        parent: result.nodes[2].nodes[0],
       }, {
         after: '',
         before: ' ',
         type: 'value',
         value: '$var',
         sourceIndex: 28,
+        parent: result.nodes[2].nodes[0],
       }],
+      parent: result.nodes[2],
     }],
+    parent: result,
   }], 'The structure of an MQ node.');
 });
 
@@ -184,6 +206,7 @@ test('`url(fun()) screen and (color), projection and (color)`.', t => {
     type: 'url',
     value: 'url(fun())',
     sourceIndex: 0,
+    parent: result,
   }, {
     after: '',
     before: ' ',
@@ -196,12 +219,14 @@ test('`url(fun()) screen and (color), projection and (color)`.', t => {
       type: 'media-type',
       value: 'screen',
       sourceIndex: 11,
+      parent: result.nodes[1],
     }, {
       after: ' ',
       before: ' ',
       type: 'keyword',
       value: 'and',
       sourceIndex: 18,
+      parent: result.nodes[1],
     }, {
       after: '',
       before: ' ',
@@ -214,8 +239,11 @@ test('`url(fun()) screen and (color), projection and (color)`.', t => {
         type: 'media-feature',
         value: 'color',
         sourceIndex: 23,
+        parent: result.nodes[1].nodes[2],
       }],
+      parent: result.nodes[1],
     }],
+    parent: result,
   }, {
     after: '',
     before: ' ',
@@ -228,12 +256,14 @@ test('`url(fun()) screen and (color), projection and (color)`.', t => {
       type: 'media-type',
       value: 'projection',
       sourceIndex: 31,
+      parent: result.nodes[2],
     }, {
       after: ' ',
       before: ' ',
       type: 'keyword',
       value: 'and',
       sourceIndex: 42,
+      parent: result.nodes[2],
     }, {
       after: '',
       before: ' ',
@@ -246,8 +276,11 @@ test('`url(fun()) screen and (color), projection and (color)`.', t => {
         type: 'media-feature',
         value: 'color',
         sourceIndex: 47,
+        parent: result.nodes[2].nodes[2],
       }],
+      parent: result.nodes[2],
     }],
+    parent: result,
   }], 'The structure of an MQ node.');
 });
 
@@ -276,8 +309,11 @@ test('`( #{"max-width" + ": 10px"} )`.', t => {
         type: 'media-feature',
         value: '#{"max-width" + ": 10px"}',
         sourceIndex: 2,
+        parent: result.nodes[0].nodes[0],
       }],
+      parent: result.nodes[0],
     }],
+    parent: result,
   }], 'The structure of an MQ node.');
 });
 
@@ -299,7 +335,9 @@ test('`#{"scree" + "n"}`.', t => {
       type: 'media-type',
       value: '#{"scree" + "n"}',
       sourceIndex: 0,
+      parent: result.nodes[0],
     }],
+    parent: result,
   }], 'The structure of an MQ node.');
 });
 
@@ -326,8 +364,11 @@ test('Malformed MQ, expression wrecked: `(example, all,), speech`.', t => {
         after: '',
         value: 'example, all,',
         sourceIndex: 1,
+        parent: result.nodes[0].nodes[0],
       }],
+      parent: result.nodes[0],
     }],
+    parent: result,
   }, {
     after: '',
     before: ' ',
@@ -340,7 +381,9 @@ test('Malformed MQ, expression wrecked: `(example, all,), speech`.', t => {
       type: 'media-type',
       value: 'speech',
       sourceIndex: 17,
+      parent: result.nodes[1],
     }],
+    parent: result,
   }], 'The structure of an MQ node.');
 });
 
@@ -352,9 +395,17 @@ test('Malformed MQ, parens don\'t match: `((min-width: -100px)`.', t => {
   t.deepEqual(result.nodes, [{
     after: '',
     before: '',
+    nodes: [],
+    parent: {
+      after: '',
+      before: '',
+      nodes: result.nodes,
+      sourceIndex: 0,
+      type: 'media-query-list',
+      value: '((min-width: -100px)',
+    },
+    sourceIndex: 0,
     type: 'media-query',
     value: '((min-width: -100px)',
-    sourceIndex: 0,
-    nodes: [],
   }], 'The structure of an MQ node.');
 });

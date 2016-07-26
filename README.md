@@ -25,6 +25,12 @@ The `result` will be this object:
 
 ```js
 {
+  type: 'media-query-list',
+  value: '(max-width: 100px), not print',
+  after: '',
+  before: '',
+  sourceIndex: 0,
+
   // the first media query
   nodes: [{
     type: 'media-query',
@@ -32,24 +38,28 @@ The `result` will be this object:
     before: '',
     after: '',
     sourceIndex: 0,
+    parent: <link to parent 'media-query-list' node>,
     nodes: [{
       type: 'media-feature-expression',
       value: '(max-width: 100px)',
       before: '',
       after: '',
       sourceIndex: 0,
+      parent: <link to parent 'media-query' node>,
       nodes: [{
         type: 'media-feature',
         value: 'max-width',
         before: '',
         after: '',
         sourceIndex: 1,
+        parent: <link to parent 'media-feature-expression' node>,
       }, {
         type: 'value',
         value: '100px',
         before: ' ',
         after: '',
         sourceIndex: 12,
+        parent: <link to parent 'media-feature-expression' node>,
       }]
     }]
   },
@@ -60,18 +70,21 @@ The `result` will be this object:
     before: ' ',
     after: '',
     sourceIndex: 20,
+    parent: <link to parent 'media-query-list' node>,
     nodes: [{
       type: 'keyword',
       value: 'not',
       before: ' ',
       after: ' ',
       sourceIndex: 20,
+      parent: <link to parent 'media-query' node>,
     }, {
       type: 'media-type',
       value: 'print',
       before: ' ',
       after: '',
       sourceIndex: 24,
+      parent: <link to parent 'media-query' node>,
     }]
   }]
 }
@@ -101,6 +114,7 @@ Node is a very generic item in terms of this parser. It's is pretty much everyth
 * `sourceIndex`: 0-based index of the node start relative to the source start (excluding trailing whitespaces);
 * `before`: a string that contain a whitespace between the node start and the previous node end/source start;
 * `after`: a string that contain a whitespace between the node end and the next node start/source end;
+* `parent`: a link to this node's parent node (a container).
 
 A node can have one of these types (according to [the 2012 CSS3 standard](https://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/)):
 
