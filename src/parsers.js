@@ -19,6 +19,7 @@ export function parseMediaFeature(string, index = 0) {
   const result = [];
   let lastModeIndex = 0;
   let mediaFeature = '';
+  let colon = null;
   let mediaFeatureValue = null;
   let indexLocal = index;
 
@@ -65,7 +66,22 @@ export function parseMediaFeature(string, index = 0) {
     // If a : is met outside of a string, function call or interpolation, than
     // this : separates a media feature and a value
     if (modesEntered[lastModeIndex].mode === 'normal' && character === ':') {
-      mediaFeatureValue = stringNormalized.substring(i + 1);
+      const mediaFeatureValueStr = stringNormalized.substring(i + 1);
+      mediaFeatureValue = {
+        type: 'value',
+        before: /^(\s*)/.exec(mediaFeatureValueStr)[1],
+        after: /(\s*)$/.exec(mediaFeatureValueStr)[1],
+        value: mediaFeatureValueStr.trim(),
+      };
+      // +1 for the colon
+      mediaFeatureValue.sourceIndex =
+        mediaFeatureValue.before.length + i + 1 + indexLocal;
+      colon = {
+        type: 'colon',
+        sourceIndex: i + indexLocal,
+        after: mediaFeatureValue.before,
+        value: ':', // for consistency only
+      };
       break;
     }
 
@@ -73,23 +89,22 @@ export function parseMediaFeature(string, index = 0) {
   }
 
   // Forming a media feature node
-  result.push({
+  mediaFeature = {
     type: 'media-feature',
     before: /^(\s*)/.exec(mediaFeature)[1],
     after: /(\s*)$/.exec(mediaFeature)[1],
     value: mediaFeature.trim(),
-  });
-  result[0].sourceIndex = result[0].before.length + indexLocal;
+  };
+  mediaFeature.sourceIndex = mediaFeature.before.length + indexLocal;
+  result.push(mediaFeature);
+
+  if (colon !== null) {
+    colon.before = mediaFeature.after;
+    result.push(colon);
+  }
 
   if (mediaFeatureValue !== null) {
-    result.push({
-      type: 'value',
-      before: /^(\s*)/.exec(mediaFeatureValue)[1],
-      after: /(\s*)$/.exec(mediaFeatureValue)[1],
-      value: mediaFeatureValue.trim(),
-    });
-    result[1].sourceIndex =
-      result[1].before.length + mediaFeature.length + indexLocal + 1;
+    result.push(mediaFeatureValue);
   }
 
   return result;

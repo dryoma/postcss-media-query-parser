@@ -54,6 +54,13 @@ The `result` will be this object:
         sourceIndex: 1,
         parent: <link to parent 'media-feature-expression' node>,
       }, {
+        type: 'colon',
+        value: ':',
+        before: '',
+        after: ' ',
+        sourceIndex: 10,
+        parent: <link to parent 'media-feature-expression' node>,
+      }, {
         type: 'value',
         value: '100px',
         before: ' ',
@@ -125,6 +132,7 @@ A node can have one of these types (according to [the 2012 CSS3 standard](https:
 * `keyword`: `only`, `not` or `and` keyword.
 * `media-feature-expression`: an expression in parentheses that checks for a condition of a particular media feature. The value would be like this: `(max-width: 1000px)`. Such nodes are [containers](#containers). They always have a `media-feature` child node, but might not have a `value` child node (like in `screen and (color)`).
 * `media-feature`: a media feature, e.g. `max-width`.
+* `colon`: present if a media feature expression has a colon (e.g. `(min-width: 1000px)`, compared to `(color)`).
 * `value`: a media feature expression value, e.g. `100px` in `(max-width: 1000px)`.
 
 ### Parsing details

@@ -1,7 +1,7 @@
 /**
  * Parses a media query list into an array of nodes. A typical node signature:
  *  {string} node.type -- one of: 'media-query', 'media-type', 'keyword',
- *    'media-feature-expression', 'media-feature', 'value'
+ *    'media-feature-expression', 'media-feature', 'colon', 'value'
  *  {string} node.value -- the contents of a particular element, trimmed
  *    e.g.: `screen`, `max-width`, `1024px`
  *  {string} node.after -- whitespaces that follow the element

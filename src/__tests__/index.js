@@ -104,6 +104,13 @@ test('`not tv and (min-width: 10px)`.', t => {
         sourceIndex: 12,
         parent: result.nodes[0].nodes[3],
       }, {
+        type: 'colon',
+        value: ':',
+        after: ' ',
+        before: '',
+        sourceIndex: 21,
+        parent: result.nodes[0].nodes[3],
+      }, {
         after: '',
         before: ' ',
         type: 'value',
@@ -177,6 +184,13 @@ test('`not tv, screen, (max-width: $var)`.', t => {
         type: 'media-feature',
         value: 'max-width',
         sourceIndex: 17,
+        parent: result.nodes[2].nodes[0],
+      }, {
+        type: 'colon',
+        value: ':',
+        after: ' ',
+        before: '',
+        sourceIndex: 26,
         parent: result.nodes[2].nodes[0],
       }, {
         after: '',
