@@ -29,7 +29,7 @@ function Container(opts) {
   });
 }
 
-Container.prototype = Object.assign(Node.prototype);
+Container.prototype = Object.create(Node.prototype);
 Container.constructor = Node;
 
 /**
