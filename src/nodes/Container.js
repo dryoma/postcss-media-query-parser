@@ -5,7 +5,6 @@
 import Node from './Node';
 
 function Container(opts) {
-  const _this = this;
   this.constructor(opts);
 
   this.nodes = opts.nodes;
@@ -25,7 +24,7 @@ function Container(opts) {
   }
 
   this.nodes.forEach(node => {
-    node.parent = _this; // eslint-disable-line no-param-reassign
+    node.parent = this; // eslint-disable-line no-param-reassign
   });
 }
 
