@@ -26,11 +26,12 @@
     "eslint": "^2.5.1",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.2.3",
+    "tap-spec": "^4.1.1",
     "tape": "^4.6.0"
   },
   "scripts": {
     "lint": "eslint . --ignore-path .gitignore",
-    "test": "tape -r babel-register \"src/**/__tests__/*.js\"",
+    "test": "tape -r babel-register \"src/**/__tests__/*.js\" | tap-spec",
     "pretest": "npm run lint",
     "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist"
