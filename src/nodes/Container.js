@@ -44,12 +44,13 @@ Container.constructor = Node;
  * @return (boolean) false, if the iteration was broken
  */
 Container.prototype.walk = function walk(filter, cb) {
-  const callback = typeof(filter) === 'function' ? filter : cb;
-  const filterReg = filter instanceof RegExp ? filter : new RegExp(filter);
+  const hasFilter = typeof filter === 'string' || filter instanceof RegExp;
+  const callback = hasFilter ? cb : filter;
+  const filterReg = typeof filter === 'string' ? new RegExp(filter) : filter;
 
   for (let i = 0; i < this.nodes.length; i ++) {
     const node = this.nodes[i];
-    const filtered = !cb ? true : filterReg.test(node.type);
+    const filtered = hasFilter ? filterReg.test(node.type) : true;
     if (filtered && callback(node, i, this.nodes) === false) {
       return false;
     }
