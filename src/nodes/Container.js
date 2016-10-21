@@ -51,7 +51,7 @@ Container.prototype.walk = function walk(filter, cb) {
   for (let i = 0; i < this.nodes.length; i ++) {
     const node = this.nodes[i];
     const filtered = hasFilter ? filterReg.test(node.type) : true;
-    if (filtered && callback(node, i, this.nodes) === false) {
+    if (filtered && callback && callback(node, i, this.nodes) === false) {
       return false;
     }
     if (node.nodes && node.walk(filter, cb) === false) { return false; }
