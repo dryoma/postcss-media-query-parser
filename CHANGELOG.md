@@ -1,3 +1,7 @@
+# 0.2.2
+
+* Fixed: walk would throw if `filter` argument is not passed.
+
 # 0.2.1
 
 * Fixed: the module failing with TypeError in Node.js 0.12.
