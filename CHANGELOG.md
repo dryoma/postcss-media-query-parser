@@ -1,3 +1,7 @@
+# 0.2.3
+
+* Removed: `/src` directory from the NPM package.
+
 # 0.2.2
 
 * Fixed: walk would throw if `filter` argument is not passed.
