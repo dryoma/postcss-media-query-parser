@@ -287,7 +287,7 @@ export function parseMediaList(string) {
   let levelLocal = 0;
 
   // Check for a `url(...)` part (if it is contents of an @import rule)
-  const doesHaveUrl = /^(\s*)url\s*\(/.exec(string);
+  const doesHaveUrl = /^(\s*)url\s*\(/i.exec(string);
   if (doesHaveUrl !== null) {
     let i = doesHaveUrl[0].length;
     let parenthesesLv = 1;
@@ -305,6 +305,19 @@ export function parseMediaList(string) {
       after: /^(\s*)/.exec(string.substring(i))[1],
     }));
     interimIndex = i;
+  }
+
+  // Check for a `file.css` part (if it is contents of an @import rule)
+  const doesHaveString = /^(\s*)("|').*?("|')(\s*)/i.exec(string);
+  if (doesHaveString) {
+    result.unshift(new Node({
+      type: 'url',
+      value: string.substring(0, doesHaveString[0].length - 1).trim(),
+      sourceIndex: doesHaveString[1].length,
+      before: doesHaveString[1],
+      after: doesHaveString[4],
+    }));
+    interimIndex = doesHaveString[0].length;
   }
 
   // Start processing the media query list

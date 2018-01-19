@@ -298,6 +298,54 @@ test('`url(fun()) screen and (color), projection and (color)`.', t => {
   }], 'The structure of an MQ node.');
 });
 
+// Import with url
+test('`"common.css" screen, projection`.', t => {
+  const result =
+    parseMedia('"common.css" screen, projection');
+
+  t.plan(2);
+
+  t.equal(result.nodes.length, 3, 'The number of media queries.');
+  t.deepEqual(result.nodes, [{
+    after: ' ',
+    before: '',
+    type: 'url',
+    value: '"common.css"',
+    sourceIndex: 0,
+    parent: result,
+  }, {
+    after: '',
+    before: '',
+    type: 'media-query',
+    value: 'screen',
+    sourceIndex: 13,
+    nodes: [{
+      after: '',
+      before: '',
+      type: 'media-type',
+      value: 'screen',
+      sourceIndex: 13,
+      parent: result.nodes[1],
+    }],
+    parent: result,
+  }, {
+    after: '',
+    before: ' ',
+    type: 'media-query',
+    value: 'projection',
+    sourceIndex: 21,
+    nodes: [{
+      after: '',
+      before: ' ',
+      type: 'media-type',
+      value: 'projection',
+      sourceIndex: 21,
+      parent: result.nodes[2],
+    }],
+    parent: result,
+  }], 'The structure of an MQ node.');
+});
+
 // Media feature fully consisting of Sass structure, colon inside
 test('`( #{"max-width" + ": 10px"} )`.', t => {
   const result = parseMedia('( #{"max-width" + ": 10px"} )');
