@@ -127,7 +127,7 @@ A node can have one of these types (according to [the 2012 CSS3 standard](https:
 
 * `media-query-list`: that is the root level node of the parsing result. A [container](#containers); its children can have types of `url` and `media-query`.
 * `url`: if a source is taken from a CSS `@import` rule, it will have a `url(...)` function call. The value of such node will be `url(http://uri-address)`, it is to be parsed separately.
-* `media-query`: such nodes correspond to each media query in a comma separated list. In the exapmle above there are two. Nodes of this type are [containers](#containers).
+* `media-query`: such nodes correspond to each media query in a comma separated list. In the example above there are two. Nodes of this type are [containers](#containers).
 * `media-type`: `screen`, `tv` and other media types.
 * `keyword`: `only`, `not` or `and` keyword.
 * `media-feature-expression`: an expression in parentheses that checks for a condition of a particular media feature. The value would be like this: `(max-width: 1000px)`. Such nodes are [containers](#containers). They always have a `media-feature` child node, but might not have a `value` child node (like in `screen and (color)`).
@@ -145,7 +145,7 @@ postcss-media-query-parser allows for cases of some **non-standard syntaxes** an
 
 `#{$media-type}` will be the node of type `media-type`, alghough `$media-type`'s value can be `only screen`. And inside `media-feature-expression` there will only be a `media-feature` type node with the value of `#{"max-width" + ": 10px"}` (this example doesn't make much sense, it's for demo purpose).
 
-But the result of parsing **malformed media queries** (such as with incorrect amount of closing parens, curly braces, etc.) can be unexpected. For exapmle, parsing:
+But the result of parsing **malformed media queries** (such as with incorrect amount of closing parens, curly braces, etc.) can be unexpected. For example, parsing:
 
 ```scss
 @media ((min-width: -100px)
@@ -162,7 +162,7 @@ Containers are [nodes](#nodes) that have other nodes as children. Container node
 
 In both cases `callback` takes these parameters:
 
-- `node` - the current node (one of the container's descendats, that the callback has been called against).
+- `node` - the current node (one of the container's descendants, that the callback has been called against).
 - `i` - 0-based index of the `node` in an array of its parent's children.
 - `nodes` - array of child nodes of `node`'s parent.
 

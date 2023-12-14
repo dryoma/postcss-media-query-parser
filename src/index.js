@@ -13,9 +13,9 @@
  * Some nodes (media queries, media feature expressions) contain other nodes.
  * They additionally have:
  *  {array} node.nodes -- an array of nodes of the type described here
- *  {funciton} node.each -- traverses direct children of the node, calling
+ *  {function} node.each -- traverses direct children of the node, calling
  *    a callback for each one
- *  {funciton} node.walk -- traverses ALL descendants of the node, calling
+ *  {function} node.walk -- traverses ALL descendants of the node, calling
  *    a callback for each one
  */
 
