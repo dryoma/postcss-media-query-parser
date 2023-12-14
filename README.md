@@ -162,7 +162,7 @@ Containers are [nodes](#nodes) that have other nodes as children. Container node
 
 In both cases `callback` takes these parameters:
 
-- `node` - the current node (one of the container's descendats, that the callback has been called against).
+- `node` - the current node (one of the container's descendants, that the callback has been called against).
 - `i` - 0-based index of the `node` in an array of its parent's children.
 - `nodes` - array of child nodes of `node`'s parent.
 
